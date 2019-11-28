@@ -2,7 +2,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../assets/img/brand.png" width="30" height="30" alt class="mr-2" />
         Budgeteer
       </a>
       <button
