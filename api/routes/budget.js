@@ -6,8 +6,8 @@ const router = Router();
 
 
 router.route('/')
-    .post((req, res) => {
-        new Budget({ ...req.body })
+    .post(utils.verifyToken, (req, res) => {
+        new Budget({ ...req.body, user: req.user })
         .save()
         .then(budget => res.status(200).json({ payload: budget, message: null }))
         .catch(err => {
@@ -15,24 +15,24 @@ router.route('/')
             return utils.handleError(res, 500, err.message || err)
         });
     })
-    .get((req, res) => {
-        Budget.find()
+    .get(utils.verifyToken, (req, res) => {
+        Budget.find({ user: req.user })
         .then(budgets => res.status(200).json({ payload: { budgets }, message: null }))
         .catch(err => utils.handleError(res, 500, err.message || err));
     });
 
 
 router.route('/:id')
-    .get((req, res) => {
-        Budget.findById(req.params.id)
+    .get(utils.verifyToken, (req, res) => {
+        Budget.findById({ _id: req.params.id, user: req.user })
         .then(budget => {
             if (!budget) return res.status(404).json({ payload: null, message: `Budget does not exist.` });
             return res.status(200).json({ payload: { budgets }, message: null });
         })
         .catch(err => utils.handleError(res, 500, err.message || err));
     })
-    .put((req, res) => {
-        Budget.findById(req.params.id)
+    .put(utils.verifyToken, (req, res) => {
+        Budget.findById({ _id: req.params.id, user: req.user })
         .then(budget => {
             if (!budget) return res.status(404).json({ payload: null, message: `Budget does not exist.` });
             Object.assign(budget, req.body);
@@ -46,8 +46,8 @@ router.route('/:id')
         })
         .catch(err => utils.handleError(res, 500, err.message || err));
     })
-    .delete((req, res) => {
-        Budget.findByIdAndDelete(req.params.id)
+    .delete(utils.verifyToken, (req, res) => {
+        Budget.findByIdAndDelete({ _id: req.params.id, user: req.user })
         .then(budget => {
             if (!budget) return res.status(404).json({ payload: null, message: `Budget does not exist.` });
             return res.status(200).json({ payload: { budgets }, message: null });
