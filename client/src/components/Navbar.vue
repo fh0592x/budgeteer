@@ -18,8 +18,8 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item" v-if="!!auth.token">
-              <a href="#" class="nav-link">Budgets</a>
+          <li class="nav-item" v-if="!!auth.token" :class="{ 'active' : route === '/app/budgets' }">
+              <router-link to="/app/budgets" exact class="nav-link">Budgets</router-link>
           </li>
           <li class="nav-item" v-if="!!auth.token">
               <a href="#" class="nav-link">Categories</a>

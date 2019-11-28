@@ -58,7 +58,7 @@ export default {
       if (!!this.credentials.username && !!this.credentials.password) {
         this.$store
           .dispatch("login", { ...this.credentials })
-          .then(() => this.$router.push("/app/budgets"))
+          .then(() => this.$router.push("/app"))
           .catch(err => {
             this.err = err;
             (this.credentials.username = ""), (this.credentials.password = "");

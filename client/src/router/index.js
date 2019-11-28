@@ -3,8 +3,13 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+import store from '../store';
+
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
+
+import Home from '../views/Home.vue';
+import Budgets from '../views/Budgets.vue';
 
 export default new VueRouter({
     mode: 'history',
@@ -16,6 +21,25 @@ export default new VueRouter({
         {
             path: '/signup',
             component: Signup
+        },
+        {
+            path: '/app',
+            component: Home,
+            redirect: {
+                path: '/app/budgets'
+            },
+            beforeEnter(to, from, next) {
+                store.dispatch('refreshAuth');
+                const { auth } = store.getters || '';
+                if (auth && auth.token) return next();
+                return next('/login');
+            },
+            children: [
+                {
+                    path: 'budgets',
+                    component: Budgets
+                }
+            ]
         }
     ]
 });
