@@ -16,8 +16,9 @@ const utils = {
                 return next();
             })
             .catch(err => utils.handleError(res, 500, err.message || err));
+        } else {
+            return utils.handleError(res, 400, `Invalid authorization header.`);
         }
-        return utils.handleError(res, 400, `Invalid authorization header.`);
     }
 };
 
