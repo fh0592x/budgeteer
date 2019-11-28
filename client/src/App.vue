@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <app-navbar />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from "./components/Navbar";
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    "app-navbar": Navbar
   }
-}
+};
 </script>
 
 <style>
+@import url(https://fonts.googleapis.com/css?family=Rubik|Miriam+Libre);
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: "Rubik", sans-serif;
 }
+
+.navbar {
+  font-family: 'Miriam Libre';
+  text-transform: uppercase;
+}
+
 </style>
