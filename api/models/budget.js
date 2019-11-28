@@ -4,9 +4,7 @@ const BudgetSchema = new Schema({
     name: {
         type: String,
         required: true,
-        index: {
-            unique: true
-        }
+        unique: true
     },
     amount: {
         type: Number,
