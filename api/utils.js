@@ -12,6 +12,7 @@ const utils = {
             User.findById(id)
             .then(user => {
                 if (!user) return utils.handleError(res, 404, `User does not exist.`);
+                req.user = user._id;
                 return next();
             })
             .catch(err => utils.handleError(res, 500, err.message || err));
