@@ -1,6 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-100">
     <app-navbar />
+    <router-view />
   </div>
 </template>
 
@@ -8,6 +9,9 @@
 import Navbar from "./components/Navbar";
 
 export default {
+  created() {
+    this.$store.dispatch('refreshAuth');
+  },
   components: {
     "app-navbar": Navbar
   }
@@ -17,11 +21,16 @@ export default {
 <style>
 @import url(https://fonts.googleapis.com/css?family=Rubik|Miriam+Libre);
 
+body,
+html {
+  height: 100%;
+}
+
 #app {
   font-family: "Rubik", sans-serif;
 }
 
-.navbar {
+h1, h2, h3, h4, h5, h6, .btn, .navbar {
   font-family: 'Miriam Libre';
   text-transform: uppercase;
 }
