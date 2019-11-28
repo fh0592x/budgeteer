@@ -5,9 +5,9 @@
         <div class="card p-4">
           <div class="card-body">
             <form>
-                <h3>Login</h3>
+              <h3>Log in</h3>
               <div class="form-group mb-3 mt-4">
-                <app-alert :error="err" v-if="err"/>
+                <app-alert :error="err" v-if="err" />
                 <!-- <label for="exampleInputEmail1">Username</label> -->
                 <input
                   type="text"
@@ -39,32 +39,36 @@
 </template>
 
 <script>
-import Alert from '../components/Alert.vue';
+import Alert from "../components/Alert.vue";
 export default {
-    components: {
-        'app-alert': Alert
-    },
-    data() {
-        return {
-            credentials: {
-                username: '',
-                password: ''
-            },
-            err: ''
-        }
-    },
-    methods: {
-        login() {
-            if (!!this.credentials.username && !!this.credentials.password) {
-                this.$store.dispatch('login', { ...this.credentials })
-                .then(() => this.$router.push('/app/budgets'))
-                .catch(err => this.err = err);
-            } else {
-                this.err = `All fields are required`;
-                return;
-            }
-        }
+  components: {
+    "app-alert": Alert
+  },
+  data() {
+    return {
+      credentials: {
+        username: "",
+        password: ""
+      },
+      err: ""
+    };
+  },
+  methods: {
+    login() {
+      if (!!this.credentials.username && !!this.credentials.password) {
+        this.$store
+          .dispatch("login", { ...this.credentials })
+          .then(() => this.$router.push("/app/budgets"))
+          .catch(err => {
+            this.err = err;
+            (this.credentials.username = ""), (this.credentials.password = "");
+          });
+      } else {
+        this.err = `All fields are required`;
+        return;
+      }
     }
+  }
 };
 </script>
 
