@@ -32,6 +32,10 @@ const BudgetSchema = new Schema({
                 required: true,
                 min: 0
             },
+            category: {
+                type: Schema.Types.ObjectId,
+                ref: 'Category'
+            },
             createdAt: {
                 type: Date,
                 default: Date.now()
@@ -46,4 +50,4 @@ BudgetSchema.pre('save', function(next) {
     return next();
 });
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('Budget', BudgetSchema);
