@@ -2,6 +2,11 @@
   <div class="container h-100">
     <div class="row d-flex h-100 justify-content-center align-items-center">
       <div class="col-6">
+        <div class="alert bg-dark text-white">
+          <i class="fa fa-info-circle mr-2"></i>
+          This app is for experimental purposes only, and in no way production-ready. Please
+          <u>DO NOT</u> use credentials that you may be using for your other online accounts.
+        </div>
         <div class="card p-4">
           <div class="card-body">
             <form>
