@@ -13,6 +13,10 @@ const BudgetSchema = new Schema({
         required: true,
         min: 0
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     totalExpended: {
         type: Number,
         default: 0
