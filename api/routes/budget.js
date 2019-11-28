@@ -50,7 +50,7 @@ router.route('/:id')
         Budget.findByIdAndDelete({ _id: req.params.id, user: req.user })
         .then(budget => {
             if (!budget) return res.status(404).json({ payload: null, message: `Budget does not exist.` });
-            return res.status(200).json({ payload: { budgets }, message: null });
+            return res.status(200).json({ payload: { budget }, message: null });
         })
         .catch(err => utils.handleError(res, 500, err.message || err));
     });
