@@ -22,6 +22,30 @@ export default {
                 .catch(err => reject(err.response.data.message || err.message || err));
             });
         },
+        getBudget: (_, payload) => {
+            return new Promise((resolve, reject) => {
+                axios.getBudget(payload)
+                .then(response => {
+                    return resolve(response.data.payload.budget);
+                })
+                .catch(err => reject(err.response.data.message || err.message || err));
+            });
+        },
+        editBudget: ({ commit, state }, payload) => {
+            return new Promise((resolve, reject) => {
+                axios.getBudget(payload)
+                .then(response => {
+                    const { budgets } = state;
+                    const idx = state.budgets.map(x => x._id).indexOf(payload.budget._id);
+                    if (idx !== -1) {
+                        budgets.splice(idx, 1, response.data.payload.budget);
+                    }
+                    commit('budgets', budgets);
+                    return resolve(budgets[idx]);
+                })
+                .catch(err => reject(err.response.data.message || err.message || err));
+            });
+        },
         addBudget: ({ commit }, payload) => {
             return new Promise((resolve, reject) => {
                 axios.addBudget(payload)
