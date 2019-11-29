@@ -3,8 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const BudgetSchema = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     amount: {
         type: Number,
