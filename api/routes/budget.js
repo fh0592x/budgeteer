@@ -38,7 +38,7 @@ router.route('/:id')
             Object.assign(budget, req.body);
             budget
             .save()
-            .then(budget => res.status(200).json({ payload: budget, message: null }))
+            .then(budget => res.status(200).json({ payload: { budget }, message: null }))
             .catch(err => {
                 if (err && err.code === 11000) return utils.handleError(res, 409, `Budget already exists.`);
                 return utils.handleError(res, 500, err.message || err)
