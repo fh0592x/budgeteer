@@ -31,18 +31,12 @@ export default {
                 .catch(err => reject(err.response.data.message || err.message || err));
             });
         },
-        editBudget: ({ commit, state }, payload) => {
+        
+        /* eslint no-console: 0 */
+        editBudget: (_, payload) => {
             return new Promise((resolve, reject) => {
-                axios.getBudget(payload)
-                .then(response => {
-                    const { budgets } = state;
-                    const idx = state.budgets.map(x => x._id).indexOf(payload.budget._id);
-                    if (idx !== -1) {
-                        budgets.splice(idx, 1, response.data.payload.budget);
-                    }
-                    commit('budgets', budgets);
-                    return resolve(budgets[idx]);
-                })
+                axios.editBudget(payload)
+                .then(response => resolve(response.data.payload.budget))
                 .catch(err => reject(err.response.data.message || err.message || err));
             });
         },
