@@ -12,6 +12,12 @@ export const getBudget = (payload) => axios.get(`/budgets/${ payload._id }`, {
     }
 });
 
+export const removeBudget = (payload) => axios.delete(`/budgets/${ payload._id }`, {
+    headers: {
+        'authorization': payload.token
+    }
+});
+
 export const addBudget = (payload) => axios.post('/budgets', {
         ...payload.budget
     }, {
