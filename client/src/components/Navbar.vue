@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item" v-if="!!auth.token" :class="{ 'active' : route === '/app/budgets' }">
-              <router-link to="/app/budgets" exact class="nav-link">Budgets</router-link>
+              <router-link tag="a" to="/app/budgets" exact class="nav-link">Budgets</router-link>
           </li>
           <li class="nav-item" v-if="!!auth.token">
               <a href="#" class="nav-link">Categories</a>
@@ -27,10 +27,10 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" v-if="!auth.token" :class="{ 'active' : route === '/login' }">
-              <router-link to="/login" exact class="nav-link">Log in</router-link>
+              <router-link tag="a" to="/login" exact class="nav-link">Log in</router-link>
           </li>
           <li class="nav-item" v-if="!auth.token" :class="{ 'active' : route === '/signup' }">
-              <router-link to="/signup" exact class="nav-link">Sign up</router-link>
+              <router-link tag="a" to="/signup" exact class="nav-link">Sign up</router-link>
           </li>
           <li class="nav-item dropdown" 
           v-if="auth.username">

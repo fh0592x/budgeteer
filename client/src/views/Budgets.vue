@@ -1,19 +1,29 @@
 <template>
   <div class="container">
-    <h2>Active Budgets</h2>
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <h2>Active Budgets</h2>
+      </div>
+      <div class="p-2">
+        <router-link tag="button" to="/app/new-budget" exact class="btn btn-dark">
+          <i class="fa fa-plus mr-2"></i>
+          New Budget
+        </router-link>
+      </div>
+    </div>
     <hr />
     <div class="row">
-      <app-budget class="col-4" v-for="budget of budgets" :key="budget._id" :budget="budget"/>
+      <app-budget class="col-4" v-for="budget of budgets" :key="budget._id" :budget="budget" />
     </div>
   </div>
 </template>
 
 <script>
-import Budget from '../components/Budget';
+import Budget from "../components/Budget";
 
 export default {
   components: {
-    'app-budget': Budget
+    "app-budget": Budget
   },
   created() {
     this.$store
