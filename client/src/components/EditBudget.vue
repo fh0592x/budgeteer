@@ -6,6 +6,10 @@
           <div class="mr-auto">
             <h2>Edit Budget</h2>
           </div>
+
+          <div class="p-2">
+            <h3 class="text-muted">{{ amount }} &bigcup;</h3>
+          </div>
         </div>
         <div class="form-group mb-3 mt-4">
           <app-alert :error="err" v-if="err" />
