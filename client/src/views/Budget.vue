@@ -4,8 +4,8 @@
       <div class="col-3">
         <ul class="list-group list-group-flush mb-2">
           <li class="list-group-item bg-primary text-white">Budget</li>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">New Budget</a>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">Edit Budget</a>
+          <router-link exact tag="a" class="list-group-item list-group-item-action" to="/app/new-budget">New Budget</router-link>
+          <a class="list-group-item list-group-item-action" href="#" @click.prevent="editMode = !editMode" :class="{ 'active' : editMode }">Edit Budget</a>
           <a class="list-group-item list-group-item-action" href="/app/new-budget">Delete Budget</a>
           <li class="list-group-item bg-primary text-white">Income</li>
           <a class="list-group-item list-group-item-action" href="/app/new-budget">New Income</a>
@@ -27,61 +27,22 @@
         </ul>
       </div>
       <div class="col-9">
-        <div class="card p-4">
-          <div class="card-body">
-            <div class="d-flex">
-              <div class="mr-auto">
-                <small class="text-muted">Budget Name</small>
-                <h2>{{ budget.name }}</h2>
-              </div>
-              <div class="mr-4">
-                <small class="text-muted">Total Amount</small>
-                <h2>{{ budget.amount }} &bigcup;</h2>
-              </div>
-              <div>
-                <small class="text-muted">Total Expended</small>
-                <h2>{{ budget.totalExpended }} &bigcup;</h2>
-              </div>
-            </div>
-            <div class="d-flex flex-column mt-2">
-              <small class="text-muted mb-2">Budget Incomes</small>
-              <div class="list-group">
-                <li
-                  class="list-group-item"
-                  v-for="inc of budget.incomes"
-                  :key="inc._id"
-                >
-                    <div class="d-flex">
-                        <div class="mr-auto">{{ inc.name }}</div>
-                        <div>{{ inc.amount }} &bigcup;</div>
-                    </div>
-                </li>
-              </div>
-            </div>
-            <div class="d-flex flex-column mt-4">
-              <small class="text-muted mb-2">Budget Expenses</small>
-              <div class="list-group">
-                <li
-                  class="list-group-item"
-                  v-for="exp of budget.expenses"
-                  :key="exp._id"
-                >
-                    <div class="d-flex">
-                        <div class="mr-auto">{{ exp.name }}</div>
-                        <div>{{ exp.amount }} &bigcup;</div>
-                    </div>
-                </li>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-budgetdetail :budget="budget" v-if="!editMode"/>
+        <app-editbudget :budget="budget" v-else/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BudgetDetail from '../components/BudgetDetail';
+import EditBudget from '../components/EditBudget';
+
 export default {
+  components: {
+      'app-budgetdetail': BudgetDetail,
+      'app-editbudget': EditBudget
+  },
   created() {
     const idx = this.$store.getters.budgets
       .map(x => x._id)
