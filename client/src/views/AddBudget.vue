@@ -15,6 +15,7 @@
               </div>
               <div class="form-group mb-3 mt-4">
                 <app-alert :error="err" v-if="err" />
+                <label for="" class="text-muted">Budget Name</label>
                 <input
                   type="text"
                   class="form-control"
@@ -22,7 +23,8 @@
                   placeholder="Enter budget name"
                 />
               </div>
-              <div class="input-group mb-3" v-for="(inc, ix) in budget.incomes" :key="ix + 'abc'">{{ ix }}
+                <label for="" class="text-muted" v-if="budget.incomes.length > 0">Incomes: Name and Amount</label>
+              <div class="input-group mb-3" v-for="(inc, ix) in budget.incomes" :key="ix + 'abc'">
                 <input
                   type="text"
                   class="form-control"
@@ -37,7 +39,9 @@
                   placeholder="Income amount"
                 />
               </div>
-              <div class="input-group mb-3" v-for="(exp, idx) in budget.expenses" :key="idx + 'def'"> {{ idx }}
+              
+                <label for="" class="text-muted"  v-if="budget.expenses.length > 0">Expenses: Name and Amount</label>
+              <div class="input-group mb-3" v-for="(exp, idx) in budget.expenses" :key="idx + 'def'">
                 <input
                   type="text"
                   class="form-control"
