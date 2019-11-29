@@ -19,3 +19,11 @@ export const addBudget = (payload) => axios.post('/budgets', {
             'authorization': payload.token
         }
     });
+
+export const editBudget = (payload) => axios.put(`/budgets/${ payload._id }`, {
+        ...payload.budget
+    }, {
+        headers: {
+            'authorization': payload.token
+        }
+    });
