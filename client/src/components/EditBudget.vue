@@ -3,13 +3,13 @@
     <div class="card-body">
       <form>
         <div class="d-flex">
-          <div class="mr-auto p-2">
+          <div class="mr-auto">
             <h2>Edit Budget</h2>
           </div>
         </div>
         <div class="form-group mb-3 mt-4">
           <app-alert :error="err" v-if="err" />
-          <label for="" class="text-muted">Budget Name</label>
+          <label for class="text-muted">Budget Name</label>
           <input
             type="text"
             class="form-control"
@@ -17,14 +17,9 @@
             placeholder="Enter budget name"
           />
         </div>
-        <label for="" class="text-muted" v-if="budget.incomes.length > 0">Incomes: Name and Amount</label>
+        <label for class="text-muted" v-if="budget.incomes.length > 0">Incomes: Name and Amount</label>
         <div class="input-group mb-3" v-for="(inc, ix) in budget.incomes" :key="ix + 'abc'">
-          <input
-            type="text"
-            class="form-control"
-            v-model="inc.name"
-            placeholder="Income name"
-          />
+          <input type="text" class="form-control" v-model="inc.name" placeholder="Income name" />
           <input
             type="text"
             class="form-control"
@@ -33,14 +28,9 @@
             placeholder="Income amount"
           />
         </div>
-        <label for="" class="text-muted" v-if="budget.expenses.length > 0">Expenses: Name and Amount</label>
+        <label for class="text-muted" v-if="budget.expenses.length > 0">Expenses: Name and Amount</label>
         <div class="input-group mb-3" v-for="(exp, idx) in budget.expenses" :key="idx + 'def'">
-          <input
-            type="text"
-            class="form-control"
-            v-model="exp.name"
-            placeholder="Expense name"
-          />
+          <input type="text" class="form-control" v-model="exp.name" placeholder="Expense name" />
           <input
             type="text"
             class="form-control"
@@ -84,7 +74,7 @@
         <hr />
         <div class="form-group">
           <div class="mr-auto">
-            <button type="button" class="btn btn-dark mr-2" @click.prevent="add">Submit</button>
+            <button type="button" class="btn btn-dark mr-2" @click.prevent="edit">Submit</button>
           </div>
         </div>
       </form>
@@ -94,6 +84,8 @@
 
 <script>
 import Alert from "../components/Alert";
+
+import { EventBus } from "../main";
 
 export default {
   components: {
@@ -111,13 +103,14 @@ export default {
   },
   props: ["budget"],
   methods: {
-    add() {
+    edit() {
       this.$store
-        .dispatch("addBudget", {
+        .dispatch("editBudget", {
+          _id: this.budget._id,
           budget: this.budget,
           token: this.$store.getters.auth.token
         })
-        .then(() => this.$router.push("/app/budgets"))
+        .then(budget => EventBus.$emit("refreshBudget", budget))
         .catch(err => (this.err = err));
     },
     addExpense() {
