@@ -3,24 +3,11 @@
     <div class="row">
       <div class="col-3">
         <ul class="list-group list-group-flush mb-2">
-          <li class="list-group-item bg-primary text-white">Budget</li>
           <router-link exact tag="a" class="list-group-item list-group-item-action" to="/app/new-budget">New Budget</router-link>
           <a class="list-group-item list-group-item-action" href="#" @click.prevent="editMode = !editMode" :class="{ 'active' : editMode }">Edit Budget</a>
           <a class="list-group-item list-group-item-action" href="/app/new-budget">Delete Budget</a>
-          <li class="list-group-item bg-primary text-white">Income</li>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">New Income</a>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">Edit Income</a>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">Delete Income</a>
-          <li class="list-group-item bg-primary text-white">Expense</li>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">New Expense</a>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">Edit Expense</a>
-          <a class="list-group-item list-group-item-action" href="/app/new-budget">Delete Expense</a>
           <a
-            class="list-group-item list-group-item-action bg-success text-white"
-            href="/app/new-budget"
-          >Save Changes</a>
-          <a
-            class="list-group-item list-group-item-action"
+            class="list-group-item list-group-item-action bg-dark text-white"
             href="#"
             @click.prevent="$router.go(-1)"
           >Go Back</a>
@@ -38,12 +25,18 @@
 import BudgetDetail from '../components/BudgetDetail';
 import EditBudget from '../components/EditBudget';
 
+import { EventBus } from '../main';
+
 export default {
   components: {
       'app-budgetdetail': BudgetDetail,
       'app-editbudget': EditBudget
   },
   created() {
+    EventBus.$on('refreshBudget', (budget) => {
+        this.budget = budget;
+        this.editMode = false;
+    });
     const idx = this.$store.getters.budgets
       .map(x => x._id)
       .indexOf(this.$route.params.id);
