@@ -1,6 +1,6 @@
 <template>
   <div class="col-4 mb-4">
-    <div class="card">
+    <router-link tag="div" :to="`/app/budgets/${ budget._id }`" exact class="card" >
       <div class="card-body">
         <h5 class="card-title">{{ budget.name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
@@ -22,7 +22,7 @@
           ></div>
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
