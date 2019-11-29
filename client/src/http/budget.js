@@ -5,3 +5,11 @@ export const getBudgets = (payload) => axios.get('/budgets', {
         'authorization': payload.token
     }
 });
+
+export const addBudget = (payload) => axios.post('/budgets', {
+        ...payload.budget
+    }, {
+        headers: {
+            'authorization': payload.token
+        }
+    });
