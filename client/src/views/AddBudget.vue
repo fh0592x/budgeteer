@@ -126,6 +126,8 @@ export default {
   },
   methods: {
     add() {
+      this.budget.expenses = this.budget.expenses.filter(x => x.name !== '' && x.amount !== '' && x.amount !== 0 && !isNaN(x.amount));
+      this.budget.incomes = this.budget.incomes.filter(x => x.name !== '' && x.amount !== '' && x.amount !== 0 && !isNaN(x.amount));
       this.$store
         .dispatch("addBudget", {
           budget: this.budget,
