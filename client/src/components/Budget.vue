@@ -32,7 +32,6 @@ export default {
         expendedPercentage() {
             const prcnt = (this.budget.totalExpended / this.budget.amount) * 100;
             /* eslint no-console: 0 */
-            console.log(prcnt);
             return prcnt > 100 ? '100' : prcnt;
         }
     },
