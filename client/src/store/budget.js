@@ -31,8 +31,13 @@ export default {
                 .catch(err => reject(err.response.data.message || err.message || err));
             });
         },
-        
-        /* eslint no-console: 0 */
+        removeBudget: (_, payload) => {
+            return new Promise((resolve, reject) => {
+                axios.removeBudget(payload)
+                .then(() => resolve())
+                .catch(err => reject(err.response.data.message || err.message || err));
+            });
+        },
         editBudget: (_, payload) => {
             return new Promise((resolve, reject) => {
                 axios.editBudget(payload)
