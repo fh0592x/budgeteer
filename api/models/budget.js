@@ -8,9 +8,25 @@ const BudgetSchema = new Schema({
     },
     amount: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
+    incomes: [
+        new Schema({
+            name: {
+                type: String,
+                required: true
+            },
+            amount: {
+                type: Number,
+                required: true,
+                min: 0
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now()
+            }
+        })
+    ],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -48,6 +64,7 @@ const BudgetSchema = new Schema({
 
 BudgetSchema.pre('save', function(next) {
     const budget = this;
+    budget.amount = budget.incomes.reduce((acc, val) => acc + val.amount, 0);
     budget.totalExpended = budget.expenses.reduce((acc, val) => acc + val.amount, 0);
     return next();
 });
