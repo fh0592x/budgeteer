@@ -11,6 +11,7 @@ import Signup from '../views/Signup.vue';
 import Home from '../views/Home.vue';
 import Budgets from '../views/Budgets.vue';
 import AddBudget from '../views/AddBudget.vue';
+import Budget from '../views/Budget.vue';
 
 export default new VueRouter({
     mode: 'history',
@@ -43,6 +44,10 @@ export default new VueRouter({
                 {
                     path: 'new-budget',
                     component: AddBudget
+                },
+                {
+                    path: 'budgets/:id',
+                    component: Budget
                 }
             ]
         }
