@@ -5,7 +5,7 @@ A MEVN (MongoDB, ExpressJS, VueJS, NodeJS) stack app to track budgets and expens
 User password is hashed by [bcrypt](https://www.npmjs.com/package/bcryptjs) using a salt length of your choice. Authorization is handled via JWTs.
 
 ### Prerequisites
-  - Add a .env file with the following variables and values:
+  - Add a .env file to the api folder root with the following variables and values:
     - BASE_URL=/api/v1
     - PORT=your desired port
     - DB_URL=your desired MongoDB URL
