@@ -19,7 +19,7 @@ App is not ready for production. If you'd like to sandbox it, do the following:
   - Clone the repo to your desired folder
   - `cd` to the api folder and execute `npm run start`
   - `cd` to the client folder and execute `npm run serve`
-  - Visit the app on `http://localhost:8080
+  - Visit the app on http://localhost:8080
   
 ### TODO
   - Build out CATEGORIES (CRUD)
