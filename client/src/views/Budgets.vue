@@ -12,9 +12,10 @@
       </div>
     </div>
     <hr />
-    <div class="row">
-      <app-budget class="col-4" v-for="budget of budgets" :key="budget._id" :budget="budget" />
+    <div class="row" v-if="budgets.length > 0">
+      <app-budget class="col-4" v-for="budget of budgets" :key="budget._id" :budget="budget"/>
     </div>
+    <h4 class="text-muted text-center mt-5" v-else>No Budgets. Add one.</h4>
   </div>
 </template>
 
